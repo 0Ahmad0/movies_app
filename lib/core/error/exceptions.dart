@@ -9,7 +9,7 @@ class ServerException implements Exception {
 
 //locale
 class LocalException implements Exception {
-  final ErrorMessageModel errorMessageModel;
+  final String message;
 
-  LocalException({required this.errorMessageModel});
+  LocalException({required this.message});
 }
