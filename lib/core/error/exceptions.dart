@@ -1,4 +1,4 @@
-import 'package:usama_movies/core/network/error_message_model.dart';
+import '/core/network/error_message_model.dart';
 
 //network
 class ServerException implements Exception {

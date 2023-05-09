@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:usama_movies/core/services/services_locator.dart';
-import '/movies/domain/entity/movie.dart';
+import '/core/services/services_locator.dart';
 import '/movies/presintation/screens/movie_screen.dart';
 
 void main() {
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: MoviesScreen(),
+      home: const MoviesScreen(),
     );
   }
 }

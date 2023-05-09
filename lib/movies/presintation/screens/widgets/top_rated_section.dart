@@ -1,16 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:usama_movies/core/utils/enumes.dart';
-import 'package:usama_movies/movies/presintation/controller/movies_bloc.dart';
-import 'package:usama_movies/movies/presintation/controller/movies_state.dart';
-
+import '/core/utils/enumes.dart';
+import '/movies/presintation/controller/movies_bloc.dart';
+import '/movies/presintation/controller/movies_state.dart';
 import '../../../../core/network/api_constants.dart';
-import '../../../../dummy.dart';
 
 class TopRatedSection extends StatelessWidget {
   const TopRatedSection({
@@ -20,6 +16,8 @@ class TopRatedSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
+      buildWhen: (previous, current) =>
+          previous.topRatedState != current.topRatedState,
       builder: (context, state) {
         switch (state.topRatedState) {
           case RequestState.loading:

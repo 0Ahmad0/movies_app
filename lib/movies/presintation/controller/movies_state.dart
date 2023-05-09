@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:usama_movies/core/utils/enumes.dart';
+import '/core/utils/enumes.dart';
 
 import '../../domain/entity/movie.dart';
 
