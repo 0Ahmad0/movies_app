@@ -15,13 +15,14 @@ class MovieDetailModel extends MovieDetail {
 
   factory MovieDetailModel.fromJson(Map<String, dynamic> json) =>
       MovieDetailModel(
-        backdropPath: json['backdrop_path'],
+        backdropPath:
+            json['backdrop_path'] ?? '/ta17TltHGdZ5PZz6oUD3N5BRurb.jpg',
         id: json['id'],
         overview: json['overview'],
         releaseDate: json['release_date'],
         runTime: json['run_time'],
         title: json['title'],
-        voteAverage: json['vote_average'],
+        voteAverage: json['vote_average'].toDouble(),
         genres: List<GenresModel>.from(
             json['genres'].map((x) => GenresModel.fromJson(x))),
       );

@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:usama_movies/movies/presintation/screens/movie_detail_screen.dart';
 import '/core/utils/enumes.dart';
 import '/movies/presintation/controller/movies_bloc.dart';
 import '/movies/presintation/controller/movies_state.dart';
@@ -41,7 +42,13 @@ class NowPlayingSection extends StatelessWidget {
                     return GestureDetector(
                       key: const Key('openMovieMinimalDetail'),
                       onTap: () {
-                        /// TODO : NAVIGATE TO MOVIE DETAILS
+                        print('Onrap');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (ctx) => MovieDetailScreen(
+                                      id: 20,
+                                    )));
                       },
                       child: Stack(
                         children: [
