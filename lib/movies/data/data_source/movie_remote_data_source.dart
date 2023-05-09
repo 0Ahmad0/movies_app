@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:usama_movies/movies/data/models/movie_detail_model.dart';
-import 'package:usama_movies/movies/data/models/recommendation_model.dart';
-import 'package:usama_movies/movies/domain/entity/recommendation.dart';
-import 'package:usama_movies/movies/domain/usecase/get_movie_details_usecase.dart';
-import 'package:usama_movies/movies/domain/usecase/get_recommendation_usecase.dart';
+
+import '../../domain/entities/recommendation.dart';
+import '../../domain/usecase/get_movie_details_usecase.dart';
+import '../../domain/usecase/get_recommendation_usecase.dart';
+import '../models/movie_details_model.dart';
+import '../models/recommendation_model.dart';
 import '/core/error/exceptions.dart';
 import '/core/network/api_constants.dart';
 
@@ -17,7 +18,7 @@ abstract class BaseMovieRemoteDataSource {
 
   Future<List<MovieModel>> getTopRatedMovies();
 
-  Future<MovieDetailModel> getMovieDetails(MovieDetailsParameters parameters);
+  Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameters);
 
   Future<List<Recommendation>> getRecommendationMovies(
       RecommendationParameters parameters);
@@ -70,12 +71,12 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   }
 
   @override
-  Future<MovieDetailModel> getMovieDetails(
+  Future<MovieDetailsModel> getMovieDetails(
       MovieDetailsParameters parameters) async {
     final response =
         await Dio().get(ApiConstants.movieDetailsPath(parameters.movieId));
     if (response.statusCode == 200) {
-      return MovieDetailModel.fromJson(response.data);
+      return MovieDetailsModel.fromJson(response.data);
     } else {
       throw ServerException(
         errorMessageModel: ErrorMessageModel.fromJson(

@@ -1,4 +1,4 @@
-import '/movies/domain/entity/genres.dart';
+import '/movies/domain/entities/genres.dart';
 
 class GenresModel extends Genres {
   const GenresModel({
@@ -7,7 +7,7 @@ class GenresModel extends Genres {
   });
 
   factory GenresModel.fromJson(Map<String, dynamic> json) => GenresModel(
-        name: json['name'],
-        id: json['id'],
+        id: json["id"],
+        name: json["name"],
       );
 }

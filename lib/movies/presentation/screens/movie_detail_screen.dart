@@ -3,15 +3,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '/core/network/api_constance.dart';
+import '/core/services/services_locator.dart';
+import '/core/utils/app_string.dart';
+import '/core/utils/enums.dart';
+import '/movies/domain/entities/genres.dart';
+import '/movies/presentation/controller/movie_details_bloc.dart';
+import '/movies/presentation/screens/dummy.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../../core/network/api_constants.dart';
-import '../../../core/services/services_locator.dart';
-import '../../../core/utils/app_constant.dart';
-import '../../../core/utils/enumes.dart';
-import '../../../dummy.dart';
-import '../../domain/entity/genres.dart';
-import '../controller/movie_details_bloc.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final int id;
@@ -41,7 +40,7 @@ class MovieDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
       builder: (context, state) {
-        switch (state.moveDetailsState) {
+        switch (state.movieDetailsState) {
           case RequestState.loading:
             return const Center(
               child: CircularProgressIndicator(),
@@ -75,7 +74,7 @@ class MovieDetailContent extends StatelessWidget {
                         blendMode: BlendMode.dstIn,
                         child: CachedNetworkImage(
                           width: MediaQuery.of(context).size.width,
-                          imageUrl: ApiConstants.imageUrl(
+                          imageUrl: ApiConstance.imageUrl(
                               state.movieDetail!.backdropPath),
                           fit: BoxFit.cover,
                         ),
@@ -149,7 +148,7 @@ class MovieDetailContent extends StatelessWidget {
                               ),
                               const SizedBox(width: 16.0),
                               Text(
-                                _showDuration(state.movieDetail!.runTime),
+                                _showDuration(state.movieDetail!.runtime),
                                 style: const TextStyle(
                                   color: Colors.white70,
                                   fontSize: 16.0,
@@ -170,7 +169,7 @@ class MovieDetailContent extends StatelessWidget {
                           ),
                           const SizedBox(height: 8.0),
                           Text(
-                            '{AppString.genres}: ${_showGenres(state.movieDetail!.genres)}',
+                            '${AppString.genres}: ${_showGenres(state.movieDetail!.genres)}',
                             style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 12.0,
@@ -190,7 +189,7 @@ class MovieDetailContent extends StatelessWidget {
                       from: 20,
                       duration: const Duration(milliseconds: 500),
                       child: const Text(
-                        'AppString.moreLikeThis',
+                        AppString.moreLikeThis,
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w500,
@@ -208,7 +207,7 @@ class MovieDetailContent extends StatelessWidget {
               ],
             );
           case RequestState.error:
-            return Center(child: Text(state.movieDetailMessage));
+            return Center(child: Text(state.movieDetailsMessage));
         }
       },
     );
@@ -243,14 +242,14 @@ class MovieDetailContent extends StatelessWidget {
       builder: (context, state) => SliverGrid(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            final recommendation = state.movieRecommendation[index];
+            final recommendation = state.recommendation[index];
             return FadeInUp(
               from: 20,
               duration: const Duration(milliseconds: 500),
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(4.0)),
                 child: CachedNetworkImage(
-                  imageUrl: ApiConstants.imageUrl(recommendation.backdropPath!),
+                  imageUrl: ApiConstance.imageUrl(recommendation.backdropPath!),
                   placeholder: (context, url) => Shimmer.fromColors(
                     baseColor: Colors.grey[850]!,
                     highlightColor: Colors.grey[800]!,

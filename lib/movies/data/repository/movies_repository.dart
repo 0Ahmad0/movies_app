@@ -1,15 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:usama_movies/movies/domain/entity/movie_detail.dart';
-import 'package:usama_movies/movies/domain/entity/recommendation.dart';
-import 'package:usama_movies/movies/domain/usecase/get_movie_details_usecase.dart';
-import 'package:usama_movies/movies/domain/usecase/get_recommendation_usecase.dart';
 import '/core/error/exceptions.dart';
 import '/core/error/failure.dart';
-import '/movies/data/data_source/movie_remote_data_source.dart';
-import '/movies/domain/entity/movie.dart';
-import '/movies/domain/repository/base_movies_repo.dart';
-
-import '../../domain/repository/base_movies_repo.dart';
+import '/movies/data/datasource/movie_remote_data_source.dart';
+import '/movies/domain/entities/movie.dart';
+import '/movies/domain/entities/movie_detail.dart';
+import '/movies/domain/entities/recommendation.dart';
+import '/movies/domain/repository/base_movies_repository.dart';
+import '/movies/domain/usecases/get_movie_details_usecase.dart';
+import '/movies/domain/usecases/get_recommendation_usecase.dart';
 
 class MoviesRepository extends BaseMoviesRepository {
   final BaseMovieRemoteDataSource baseMovieRemoteDataSource;
@@ -22,8 +20,7 @@ class MoviesRepository extends BaseMoviesRepository {
     try {
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(
-          ServerFailure(message: failure.errorMessageModel.statusMessage));
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
@@ -33,8 +30,7 @@ class MoviesRepository extends BaseMoviesRepository {
     try {
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(
-          ServerFailure(message: failure.errorMessageModel.statusMessage));
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
@@ -44,8 +40,7 @@ class MoviesRepository extends BaseMoviesRepository {
     try {
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(
-          ServerFailure(message: failure.errorMessageModel.statusMessage));
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
@@ -56,21 +51,19 @@ class MoviesRepository extends BaseMoviesRepository {
     try {
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(
-          ServerFailure(message: failure.errorMessageModel.statusMessage));
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure, List<Recommendation>>> getRecommendationMovies(
+  Future<Either<Failure, List<Recommendation>>> getRecommendation(
       RecommendationParameters parameters) async {
     final result =
-        await baseMovieRemoteDataSource.getRecommendationMovies(parameters);
+        await baseMovieRemoteDataSource.getRecommendation(parameters);
     try {
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(
-          ServerFailure(message: failure.errorMessageModel.statusMessage));
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 }

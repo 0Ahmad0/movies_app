@@ -1,6 +1,6 @@
-import 'movies/domain/entity/genres.dart';
-import 'movies/domain/entity/movie_detail.dart';
-import 'movies/domain/entity/recommendation.dart';
+import '/movies/domain/entities/genres.dart';
+import '/movies/domain/entities/movie_detail.dart';
+import '/movies/domain/entities/recommendation.dart';
 
 MovieDetail movieDetailDummy = const MovieDetail(
   backdropPath: "/nmGWzTLMXy9x7mKd8NKPLmHtWGa.jpg",
@@ -11,7 +11,7 @@ MovieDetail movieDetailDummy = const MovieDetail(
   overview:
       "A fanboy of a supervillain supergroup known as the Vicious 6, Gru hatches a plan to become evil enough to join them, with the backup of his followers, the Minions.",
   releaseDate: "2022-06-29",
-  runTime: 87,
+  runtime: 87,
   title: "Minions: The Rise of Gru",
   voteAverage: 7.8,
 );

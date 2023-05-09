@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/core/services/services_locator.dart';
-import '/movies/presintation/screens/movie_screen.dart';
+import '/core/utils/app_string.dart';
+import '/movies/presentation/screens/movies_screen.dart';
+import 'movies/presentation/screens/splash_screen.dart';
 
 void main() {
   ServicesLocator().init();
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: AppString.appName,
       theme: ThemeData.dark(),
-      home: const MoviesScreen(),
+      home: const SplashScreen(),
     );
   }
 }

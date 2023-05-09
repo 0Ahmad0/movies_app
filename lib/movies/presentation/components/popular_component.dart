@@ -2,24 +2,22 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '/core/network/api_constance.dart';
+import '/core/utils/enums.dart';
+import '/movies/presentation/controller/movies_bloc.dart';
+import '/movies/presentation/controller/movies_state.dart';
 import 'package:shimmer/shimmer.dart';
-import '/core/utils/enumes.dart';
-import '/movies/presintation/controller/movies_bloc.dart';
-import '/movies/presintation/controller/movies_state.dart';
-import '../../../../core/network/api_constants.dart';
 
-class TopRatedSection extends StatelessWidget {
-  const TopRatedSection({
-    super.key,
-  });
+class PopularComponent extends StatelessWidget {
+  const PopularComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
       buildWhen: (previous, current) =>
-          previous.topRatedState != current.topRatedState,
+          previous.popularState != current.popularState,
       builder: (context, state) {
-        switch (state.topRatedState) {
+        switch (state.popularState) {
           case RequestState.loading:
             return const SizedBox(
               height: 170.0,
@@ -36,10 +34,10 @@ class TopRatedSection extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  itemCount: state.topRatedMovies.length,
+                  itemCount: state.popularMovies.length,
                   itemBuilder: (context, index) {
-                    final movie = state.topRatedMovies[index];
-                    return Padding(
+                    final movie = state.popularMovies[index];
+                    return Container(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: InkWell(
                         onTap: () {
@@ -51,8 +49,7 @@ class TopRatedSection extends StatelessWidget {
                           child: CachedNetworkImage(
                             width: 120.0,
                             fit: BoxFit.cover,
-                            imageUrl:
-                                ApiConstants.imageUrl(movie.backdropPath!),
+                            imageUrl: ApiConstance.imageUrl(movie.backdropPath),
                             placeholder: (context, url) => Shimmer.fromColors(
                               baseColor: Colors.grey[850]!,
                               highlightColor: Colors.grey[800]!,
@@ -78,7 +75,9 @@ class TopRatedSection extends StatelessWidget {
           case RequestState.error:
             return SizedBox(
               height: 170.0,
-              child: Text(state.topRatedMessage),
+              child: Center(
+                child: Text(state.nowPlayingMessage),
+              ),
             );
         }
       },
